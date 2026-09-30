@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+<!-- ============================================================
+     META TAGS / SEO / COMPARTILHAMENTO
+     ============================================================ -->
+<title>Diagnóstico: vender no TikTok Shop sem estoque e sem aparecer</title>
+<meta name="description" content="Responda 4 perguntas e descubra o que está te impedindo de fazer suas primeiras vendas como afiliado no TikTok Shop — sem estoque e sem aparecer na câmera." />
+
+<!-- Open Graph (Facebook / WhatsApp / Instagram) -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Venda no TikTok Shop sem estoque e sem aparecer" />
+<meta property="og:description" content="Faça o diagnóstico de 1 minuto e descubra o que trava suas primeiras vendas como afiliado." />
+<!-- TROQUE a imagem de compartilhamento: coloque "og-image.jpg" (1200x630) na mesma pasta -->
+<meta property="og:image" content="og-image.jpg" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Venda no TikTok Shop sem estoque e sem aparecer" />
+<meta name="twitter:description" content="Faça o diagnóstico de 1 minuto e descubra o que trava suas primeiras vendas." />
+<meta name="twitter:image" content="og-image.jpg" />
+
+<!-- ============================================================
+     PIXELS DE RASTREAMENTO (DESATIVADOS)
+     Descomente e troque PIXEL_ID pelos seus IDs reais.
+     A função track() já dispara os eventos nestes pixels.
+     ------------------------------------------------------------
+     >>> META PIXEL (Facebook) <<<
+     <script>
+       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+       n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+       n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+       t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+       document,'script','https://connect.facebook.net/en_US/fbevents.js');
+       fbq('init', 'PIXEL_ID');           // <<< TROQUE PIXEL_ID
+       fbq('track', 'PageView');
+     </script>
+
+     >>> TIKTOK PIXEL <<<
+     <script>
+       !function (w, d, t) { w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
+       ttq.methods=["page","track","identify","instances","debug","on","off","once",
+       "ready","alias","group","enableCookie","disableCookie"];ttq.setAndDefer=function(t,e){
+       t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};
+       for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+       ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)
+       ttq.setAndDefer(e,ttq.methods[n]);return e};ttq.load=function(e,n){
+       var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{};
+       ttq._i[e]=[];ttq._i[e]._u=i;ttq._t=ttq._t||{};ttq._t[e]=+new Date;ttq._o=ttq._o||{};
+       ttq._o[e]=n||{};var o=d.createElement("script");o.type="text/javascript";
+       o.async=!0;o.src=i+"?sdkid="+e+"&lib="+t;var a=d.getElementsByTagName("script")[0];
+       a.parentNode.insertBefore(o,a)};
+       ttq.load('PIXEL_ID');              // <<< TROQUE PIXEL_ID
+       ttq.page();
+       }(window, document, 'ttq');
+     </script>
+     ============================================================ -->
+
+<!-- FONTE INTER (Google Fonts). Para 100% offline, remova estas 2 linhas — o fallback usa sans-serif. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+  /* ====== TOKENS DE ESTILO ====== */
+  :root{
+    --bg:#000000;
+    --card:#121212;
+    --accent:#FE2C55;   /* rosa/vermelho */
+    --accent2:#25F4EE;  /* ciano */
+    --text:#FFFFFF;
+    --muted:#A1A1A1;
+    --radius:16px;
+    --maxw:390px;       /* mobile-first: pensada para 390px */
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+
+  html,body{height:100%;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.4;
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    justify-content:center;
+    min-height:100dvh;
+  }
+
+  /* ====== FUNDO AURORA (dois brilhos difusos, movimento lento) ====== */
+  .aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#000;}
+  .aurora .blob{position:absolute;width:70vmax;height:70vmax;border-radius:50%;filter:blur(90px);opacity:.15;will-change:transform;}
+  .aurora .pink{background:var(--accent);top:-26vmax;left:-26vmax;animation:aurora1 24s ease-in-out infinite alternate;}
+  .aurora .cyan{background:var(--accent2);bottom:-26vmax;right:-26vmax;animation:aurora2 28s ease-in-out infinite alternate;}
+  @keyframes aurora1{0%{transform:translate(0,0) scale(1);}100%{transform:translate(13vmax,10vmax) scale(1.15);}}
+  @keyframes aurora2{0%{transform:translate(0,0) scale(1);}100%{transform:translate(-12vmax,-8vmax) scale(1.12);}}
+  @media (prefers-reduced-motion:reduce){.aurora .blob{animation:none;}}
+  /* Quadriculado sutil por cima dos brilhos (não compete com o conteúdo) */
+  .aurora .grid{
+    position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size:38px 38px;
+  }
+
+  /* Container central limitado a 390px (acima do fundo aurora) */
+  #app{
+    width:100%;
+    max-width:var(--maxw);
+    min-height:100dvh;
+    padding:24px 20px calc(28px + env(safe-area-inset-bottom));
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    z-index:1;
+  }
+
+  /* ====== SISTEMA DE TELAS + FADE ====== */
+  .screen{
+    display:none;flex-direction:column;flex:1;
+    opacity:0;transition:opacity .35s ease;
+  }
+  .screen.active{display:flex;}
+  .screen.show{opacity:1;}
+
+  /* ====== TOPO DA PERGUNTA (voltar + progresso) ====== */
+  .q-top{display:flex;flex-direction:column;gap:14px;margin-bottom:26px;}
+  .back{align-self:flex-start;background:none;border:none;cursor:pointer;color:var(--muted);font-family:inherit;font-size:14px;font-weight:500;padding:4px 2px;}
+  .back:active{color:var(--text);}
+  .back.hidden{visibility:hidden;}
+
+  /* ====== BARRA DE PROGRESSO (4 etapas) ====== */
+  .progress{display:flex;gap:6px;}
+  .progress .step{flex:1;height:5px;border-radius:99px;background:#2a2a2a;overflow:hidden;}
+  .progress .step > i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s ease;}
+  .progress .step.done > i{width:100%;}
+  .progress .step.active > i{width:45%;animation:activePulse 1.4s ease-in-out infinite;}
+  @keyframes activePulse{0%,100%{opacity:.55}50%{opacity:1}}
+
+  /* ====== HERO ====== */
+  .hero{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center;gap:20px;}
+  /* Imagem do topo do hero */
+  .hero-img{width:100%;border-radius:var(--radius);display:block;object-fit:cover;object-position:center top;max-height:44vh;box-shadow:0 14px 40px rgba(0,0,0,0.5);}
+  @media (min-height:760px){ .hero-img{max-height:50vh;} }
+  .badge{align-self:center;font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--accent2);border:1px solid rgba(37,244,238,.35);padding:6px 14px;border-radius:99px;}
+  h1{font-size:30px;line-height:1.18;font-weight:800;letter-spacing:-.5px;}
+  h1 .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero p{color:var(--muted);font-size:16px;}
+
+  /* ====== BOTÃO PRIMÁRIO ====== */
+  .btn{appearance:none;border:none;cursor:pointer;font-family:inherit;font-size:17px;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--accent),#ff5c7a);padding:18px 22px;border-radius:var(--radius);width:100%;transition:transform .12s ease,filter .12s ease;box-shadow:0 8px 30px rgba(254,44,85,.35);}
+  .btn:active{transform:scale(.98);filter:brightness(1.05);}
+  .btn-wa{background:linear-gradient(90deg,#25D366,#1ebe5a);box-shadow:0 8px 30px rgba(37,211,102,.35);display:flex;align-items:center;justify-content:center;gap:10px;}
+
+  /* ====== PERGUNTAS ====== */
+  .q-kicker{color:var(--accent2);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+  .q-title{font-size:25px;font-weight:800;line-height:1.2;letter-spacing:-.4px;margin-bottom:24px;}
+  .options{display:flex;flex-direction:column;gap:12px;}
+  .option{position:relative;display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid #232323;border-radius:var(--radius);padding:22px 18px;cursor:pointer;text-align:left;color:var(--text);font-family:inherit;font-size:16.5px;font-weight:500;transition:transform .12s ease;}
+  .option:active{transform:scale(.99);}
+  /* indicador redondo (radio) que vira checkbox ao selecionar */
+  .option .radio{flex:0 0 22px;width:22px;height:22px;border-radius:50%;border:2px solid #3a3a3a;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;line-height:1;transition:border-color .15s ease,background .15s ease;}
+  .option.selected{border-color:transparent;background-image:linear-gradient(#1b1b1b,#1b1b1b),linear-gradient(90deg,var(--accent),var(--accent2));background-origin:border-box;background-clip:padding-box,border-box;}
+  .option.selected .radio{border-color:transparent;background:linear-gradient(135deg,var(--accent),var(--accent2));}
+  .option.selected .radio::after{content:"✓";}
+  @media (hover:hover){
+    .option:hover{border-color:transparent;background-image:linear-gradient(var(--card),var(--card)),linear-gradient(90deg,var(--accent),var(--accent2));background-origin:border-box;background-clip:padding-box,border-box;}
+  }
+
+  /* ====== TELAS DE TRANSIÇÃO ====== */
+  .transition{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:22px;}
+  .trans-content{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;}
+  .skip{background:none;border:none;color:var(--muted);font-family:inherit;font-size:14px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:8px 12px;}
+  .skip:active{color:var(--text);}
+  /* Conteúdo embaixo da pergunta (notificações ou animação da pergunta) */
+  .q-below{margin-top:32px;display:flex;flex-direction:column;align-items:center;gap:9px;}
+  /* Animação de entrada do conteúdo das perguntas 2–4 */
+  .q-below .dblock,.q-below .darrow,.q-below .dcaption,.q-below .trans-icon,.q-below .trans-msg{
+    opacity:0;transform:translateY(10px);animation:belowIn .5s ease forwards;
+  }
+  @keyframes belowIn{to{opacity:1;transform:none;}}
+  .notif{
+    display:flex;align-items:flex-start;gap:10px;
+    background:rgba(28,28,30,0.72);            /* #1C1C1E com leve transparência */
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.07);
+    border-radius:14px;padding:10px 12px;width:85%;
+    box-shadow:0 10px 26px rgba(0,0,0,0.45);
+    opacity:0;transform:translateY(-18px);     /* entra deslizando de cima */
+    animation:notifIn .5s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .notif .ic{flex:0 0 34px;height:34px;width:34px;border-radius:9px;background:#000;display:flex;align-items:center;justify-content:center;}
+  .notif .ic svg{width:19px;height:19px;}
+  /* min-width:0 é o que permite o ellipsis funcionar dentro do flex */
+  .notif .body{flex:1 1 auto;min-width:0;text-align:left;}
+  /* título em UMA linha, nome do produto cortado com … (nunca quebra nem empurra o horário) */
+  .notif .p{font-size:12.5px;font-weight:700;color:#fff;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .notif .c{font-size:11.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  /* horário: largura própria, fixo à direita e alinhado ao topo */
+  .notif .time{flex:0 0 auto;white-space:nowrap;font-size:11px;color:var(--muted);line-height:1.25;}
+  @keyframes notifIn{to{opacity:1;transform:none;}}
+  /* Diagrama de 3 blocos (menores que os cards de resposta, com ícone) */
+  .diagram{display:flex;flex-direction:column;gap:6px;align-items:center;width:100%;}
+  .dblock{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid #232323;border-radius:12px;padding:9px 13px;width:76%;text-align:left;}
+  .dblock .dic{flex:0 0 32px;width:32px;height:32px;border-radius:9px;background:#1c1c1c;display:flex;align-items:center;justify-content:center;font-size:17px;}
+  .dblock .dtx{flex:1;min-width:0;}
+  .dblock .n{font-size:13px;font-weight:700;line-height:1.2;}
+  .dblock .d{font-size:11px;color:var(--muted);margin-top:1px;}
+  .darrow{color:var(--accent2);font-size:15px;line-height:1;}
+  .dcaption{color:var(--text);font-weight:700;font-size:13.5px;margin-top:6px;text-align:center;}
+  /* Transições 3 e 4 — ícone + mensagem */
+  .trans-icon{font-size:52px;line-height:1;}
+  .trans-msg{font-size:17px;font-weight:600;max-width:300px;line-height:1.4;}
+  /* Etapa "Analisando sua resposta…" */
+  .analyzing{display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .spinner{width:60px;height:60px;border-radius:50%;border:4px solid rgba(255,255,255,0.10);border-top-color:var(--accent);border-right-color:var(--accent2);animation:spin .9s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .analyzing .msg{font-size:17px;font-weight:600;}
+
+  /* ====== TELA DA VSL ====== */
+  .vsl{flex:1;display:flex;flex-direction:column;gap:16px;text-align:center;}
+  .vsl h2{font-size:24px;font-weight:800;line-height:1.2;letter-spacing:-.4px;}
+  .diagnosis{color:var(--text);font-size:16px;line-height:1.5;}
+  .vsl-headline{color:var(--muted);font-size:14px;line-height:1.45;}
+  /* ESPAÇO RESERVADO PARA O VÍDEO — troque o bloco .video-slot no HTML pelo seu <iframe>. */
+  .video-slot{position:relative;width:100%;aspect-ratio:9/16;background:var(--card);border:1px solid #232323;border-radius:var(--radius);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+  .video-slot .placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--muted);}
+  .video-slot .play{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;}
+  .video-slot .play svg{margin-left:4px;}
+  /* CTA fixo no rodapé */
+  /* CTA fixo: fundo transparente com leve desfoque que some para cima (sem retângulo preto) */
+  .sticky-cta{position:sticky;bottom:0;z-index:10;margin:0 -20px;padding:16px 20px calc(16px + env(safe-area-inset-bottom));background:transparent;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);-webkit-mask-image:linear-gradient(to top,#000 62%,transparent);mask-image:linear-gradient(to top,#000 62%,transparent);}
+  .sticky-cta .fine{margin-top:8px;}
+
+  /* ====== TELA DE CAPTURA (nome + WhatsApp) ====== */
+  .capture{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;}
+  .capture h2{font-size:26px;font-weight:800;letter-spacing:-.4px;text-align:center;}
+  .capture .sub{color:var(--muted);font-size:15px;text-align:center;margin-top:-6px;}
+  .field{display:flex;flex-direction:column;gap:6px;text-align:left;}
+  .field span{font-size:13px;color:var(--muted);font-weight:500;}
+  .field input{background:var(--card);border:1px solid #232323;border-radius:var(--radius);padding:16px;color:var(--text);font-family:inherit;font-size:16px;} /* 16px evita zoom no iOS */
+  .field input::placeholder{color:#666;}
+  .field input:focus{outline:none;border-color:var(--accent2);}
+  .err{color:var(--accent);font-size:13px;min-height:16px;text-align:center;}
+
+  .fine{color:var(--muted);font-size:12px;text-align:center;}
+</style>
+</head>
+
+<body>
+
+<!-- Fundo aurora (fica atrás de todo o conteúdo) -->
+<div class="aurora" aria-hidden="true">
+  <div class="blob pink"></div>
+  <div class="blob cyan"></div>
+  <div class="grid"></div>
+</div>
+
+<div id="app">
+
+  <!-- ======================= HERO / CAPA ======================= -->
+  <section class="screen" data-screen="hero">
+    <div class="hero">
+      <!-- Imagem do topo (troque o arquivo hero.jpg na pasta para atualizar) -->
+      <img class="hero-img" src="hero.jpg" alt="Vendas acontecendo no TikTok Shop" />
+      <span class="badge" id="hero-badge"></span>
+      <h1>Como vender no <span class="grad">TikTok Shop sem estoque e sem nunca aparecer</span></h1>
+      <p>Responda 4 perguntas e descubra o que está te impedindo de fazer suas primeiras vendas como afiliado.</p>
+      <button class="btn" onclick="start()">Fazer meu diagnóstico →</button>
+      <p class="fine" style="margin-top:4px;" id="hero-fine"></p>
+    </div>
+  </section>
+
+  <!-- ======================= PERGUNTAS ======================= -->
+  <section class="screen" data-screen="question">
+    <div class="q-top">
+      <button class="back" id="q-back" onclick="goBack()">← Voltar</button>
+      <div class="progress" id="progress"></div>
+    </div>
+    <div>
+      <div class="q-kicker" id="q-kicker"></div>
+      <div class="q-title" id="q-title"></div>
+      <div class="options" id="q-options"></div>
+      <!-- Conteúdo embaixo da pergunta: notificações (P1) ou animação da pergunta (P2–P4) -->
+      <div class="q-below" id="q-below" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ======================= TRANSIÇÃO ======================= -->
+  <section class="screen" data-screen="transition">
+    <div class="transition">
+      <div class="trans-content" id="trans-content"></div>
+      <button class="skip" onclick="skipTransition()">Pular</button>
+    </div>
+  </section>
+
+  <!-- ======================= VSL ======================= -->
+  <section class="screen" data-screen="vsl">
+    <div class="q-top"><div class="progress" id="progress-vsl"></div></div>
+    <div class="vsl">
+      <h2>Seu diagnóstico está pronto 🎯</h2>
+      <!-- Frase personalizada gerada a partir de answers.q2 (a trava) -->
+      <p class="diagnosis" id="diagnosis"></p>
+      <!-- Headline acima do vídeo -->
+      <p class="vsl-headline">Como começar na prática: escolher o produto, montar o vídeo e fazer a primeira venda</p>
+
+      <!-- =========================================================
+           TROQUE ESTE BLOCO PELO VÍDEO DA VSL
+           Ex.: <iframe src="URL_DO_SEU_VIDEO" style="position:absolute;
+                 inset:0;width:100%;height:100%;border:0;" allow="autoplay"
+                 allowfullscreen></iframe>
+           ========================================================= -->
+      <div class="video-slot" id="videoSlot">
+        <div class="placeholder">
+          <div class="play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+          <span>Espaço reservado para a VSL</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA fixo no rodapé — leva para a tela de captura -->
+    <div class="sticky-cta" id="stickyCta">
+      <button class="btn" onclick="goToCapture()">Quero começar agora →</button>
+      <p class="fine">Passo a passo direto no seu WhatsApp</p>
+    </div>
+  </section>
+
+  <!-- ======================= CAPTURA (nome + WhatsApp) ======================= -->
+  <section class="screen" data-screen="capture">
+    <div class="capture">
+      <h2>Falta um passo</h2>
+      <p class="sub">Preencha para receber o passo a passo no seu WhatsApp.</p>
+      <label class="field">
+        <span>Seu nome</span>
+        <input id="cap-name" type="text" autocomplete="name" placeholder="Como você se chama?" />
+      </label>
+      <label class="field">
+        <span>Seu WhatsApp (com DDD)</span>
+        <input id="cap-wa" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(21) 99999-9999" />
+      </label>
+      <p class="err" id="cap-err"></p>
+      <button class="btn btn-wa" onclick="submitCapture()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.06c-.24.68-1.42 1.31-1.95 1.35-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.37-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.27-.29.58-.36.78-.36l.56.01c.18.01.42-.07.66.5.24.58.82 2.01.89 2.16.07.14.12.31.02.51-.1.2-.15.31-.29.48-.14.17-.3.38-.43.51-.14.14-.29.29-.12.57.17.29.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.42.29.14.45.12.62-.07.17-.2.71-.83.9-1.11.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.69-.17 1.37z"/></svg>
+        Falar no WhatsApp agora
+      </button>
+      <p class="fine">Seus dados são usados só para este atendimento.</p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ============================================================
+   ============  CONFIGURAÇÃO (edite tudo aqui)  ==============
+   ============================================================ */
+
+/* >>> TROQUE O NÚMERO DO WHATSAPP AQUI <<<
+   Formato: código do país + DDD + número, apenas dígitos. */
+const WHATSAPP_NUMBER = "5521966042689";
+
+/* Duração da transição "Analisando sua resposta…" entre as perguntas (ms) */
+const ANALYZE_MS = 1600;
+
+/* Tempo do estado "selecionado" da opção antes de ir para a transição (ms) */
+const SELECT_DELAY_MS = 250;
+
+/* Atraso opcional para exibir o botão da VSL (ms). 0 = imediato. Ex.: 20000 = após 20s. */
+const CTA_DELAY_MS = 0;
+
+/* Textos de tempo/topo (capa) */
+const BADGE_TEXT = "DIAGNÓSTICO EM 1 MINUTO";
+const FINE_TEXT  = "Leva menos de 1 minuto • Sem cadastro";
+
+/* >>> NOTIFICAÇÕES DE VENDA (transição 1) — SUBSTITUA por dados reais <<<
+   Produtos e valores genéricos/plausíveis por enquanto. */
+const TRANS1_NOTIFS = [
+  { produto:"Kit Skincare Facial",                        comissao:"R$ 42,90" },
+  { produto:"Fone Bluetooth Pro",                         comissao:"R$ 68,50" },
+  { produto:"Borrifador Nano Spray Elétrico Recarregável", comissao:"R$ 39,90" },
+  { produto:"Organizador de Cozinha",                     comissao:"R$ 27,30" },
+  { produto:"Luminária LED de Mesa",                      comissao:"R$ 35,00" },
+  { produto:"Massageador Portátil",                       comissao:"R$ 54,80" },
+  { produto:"Garrafa Térmica Inox",                       comissao:"R$ 31,20" }
+];
+
+/* Horários por posição na pilha (topo = mais recente). Espaçados p/ parecer natural. */
+const NOTIF_TIMES = ["agora","há 4 min","há 12 min","há 28 min","há 47 min","há 1 h","há 2 h"];
+
+/* Notificações de venda que se acumulam embaixo dos cards (a página estende o scroll) */
+const NOTIF_START_DELAY_MS   = 3500;  // espera antes da 1ª aparecer (não surge logo de cara)
+const NOTIF_INTERVAL_MS      = 3000;  // intervalo entre as PRIMEIRAS (ritmo rápido)
+const NOTIF_INTERVAL_SLOW_MS = 9000;  // intervalo depois das primeiras (mais devagar)
+const NOTIF_FAST_COUNT       = 3;     // quantas entram no ritmo rápido antes de desacelerar
+const NOTIF_MAX_KEEP         = 30;    // limite de segurança (remove só as bem antigas do fim)
+
+/* Logo do TikTok (nota musical com o efeito ciano/rosa da marca) */
+const TT_PATH = "M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.78.12v-3.2a5.7 5.7 0 0 0-.78-.05 5.69 5.69 0 1 0 5.69 5.69V9.01a7.34 7.34 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.24-1.48z";
+const TIKTOK_SVG =
+  '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">' +
+    '<path d="'+TT_PATH+'" fill="#25F4EE" transform="translate(-1.1,1.1)"/>' +
+    '<path d="'+TT_PATH+'" fill="#FE2C55" transform="translate(1.1,-1.1)"/>' +
+    '<path d="'+TT_PATH+'" fill="#ffffff"/>' +
+  '</svg>';
+
+/* Monta o HTML de um card de notificação de venda (tempo começa em "agora") */
+function buildNotif(it){
+  return '<div class="notif">' +
+    '<div class="ic">'+TIKTOK_SVG+'</div>' +
+    '<div class="body">' +
+      '<div class="p">Vendeu · '+it.produto+'</div>' +
+      '<div class="c">Comissão: '+it.comissao+'</div>' +
+    '</div>' +
+    '<div class="time">agora</div>' +
+  '</div>';
+}
+
+/* ------------------------------------------------------------
+   PERGUNTAS  (edite livremente)
+   O texto salvo na resposta é o "label" da opção escolhida.
+   'below' = conteúdo/animação que aparece EMBAIXO da pergunta enquanto a pessoa responde.
+             (a transição entre perguntas é sempre só "Analisando sua resposta…")
+   ------------------------------------------------------------ */
+const QUESTIONS = [
+  {
+    kicker:"Pergunta 1 de 4",
+    title:"Qual é o seu momento hoje?",
+    options:[
+      {label:"Nunca vendi nada pela internet"},
+      {label:"Já tentei e parei"},
+      {label:"Vendo, mas pouco"},
+      {label:"Vendo bem e quero escalar"}
+    ],
+    // Só aqui: notificações de venda se acumulando embaixo dos cards
+    below:{ type:"notifications" }
+  },
+  {
+    kicker:"Pergunta 2 de 4",
+    title:"O que mais te trava hoje?",
+    options:[
+      {label:"Tenho vergonha de aparecer em vídeo"},
+      {label:"Não sei escolher o produto certo"},
+      {label:"Não tenho dinheiro pra comprar estoque"},
+      {label:"Já postei, mas não vendeu"}
+    ],
+    // Diagrama de 3 blocos + legenda (embaixo da pergunta)
+    below:{
+      type:"diagram",
+      blocks:[
+        { icon:"🔥", n:"Produto validado", d:"já está vendendo" },
+        { icon:"🤖", n:"Vídeo com IA",     d:"você não aparece" },
+        { icon:"💰", n:"Comissão",         d:"sem estoque, sem envio" }
+      ],
+      caption:"Você não compra, não guarda e não envia nada."
+    }
+  },
+  {
+    kicker:"Pergunta 3 de 4",
+    title:"Como está seu perfil no TikTok?",
+    options:[
+      {label:"Não tenho perfil"},
+      {label:"Tenho, mas está parado"},
+      {label:"Posto de vez em quando"},
+      {label:"Posto sempre"}
+    ],
+    // Mensagem sobre liberar a loja (embaixo da pergunta)
+    below:{ type:"message", icon:"🏪", text:"O TikTok só libera a loja depois de um número mínimo de seguidores. Tem caminho pra isso." }
+  },
+  {
+    kicker:"Pergunta 4 de 4",
+    title:"Quanto tempo por dia você tem?",
+    options:[
+      {label:"Menos de 1 hora"},
+      {label:"1 a 2 horas"},
+      {label:"3 horas ou mais"}
+    ],
+    // Relógio + mensagem (embaixo da pergunta)
+    below:{ type:"clock", icon:"⏰", text:"Poucas horas por dia, bem usadas, resolvem." }
+  }
+];
+
+/* ------------------------------------------------------------
+   FRASE PERSONALIZADA DO RESULTADO — usa answers.q2 (a trava).
+   As chaves DEVEM bater com os 'label' das opções da pergunta 2.
+   ------------------------------------------------------------ */
+const DIAG_Q2 = {
+  "Tenho vergonha de aparecer em vídeo":      "O que te trava é a vergonha de aparecer — e dá pra vender sem nunca mostrar o rosto.",
+  "Não sei escolher o produto certo":         "O que te trava é escolher o produto certo — e existe um jeito simples de achar os que já estão vendendo.",
+  "Não tenho dinheiro pra comprar estoque":   "O que te trava é achar que precisa de estoque — como afiliado, você vende sem comprar nada.",
+  "Já postei, mas não vendeu":                "Você já postou e não vendeu — o problema não é esforço, é o método."
+};
+function buildDiagnosis(){
+  return DIAG_Q2[answers.q2] || "O que te trava é a falta de um método claro — e é exatamente isso que o vídeo abaixo resolve.";
+}
+
+/* ============================================================
+   ==================  RASTREAMENTO (ganchos)  ================
+   Dispara em fbq (Meta), ttq (TikTok) e gtag (GA/Ads) se existirem.
+   ============================================================ */
+function track(eventName, data){
+  data = data || {};
+  try { if (typeof fbq  === "function")               fbq("trackCustom", eventName, data); } catch(e){}
+  try { if (typeof ttq  !== "undefined" && ttq.track) ttq.track(eventName, data);          } catch(e){}
+  try { if (typeof gtag === "function")               gtag("event", eventName, data);       } catch(e){}
+}
+function trackLead(data){
+  data = data || {};
+  try { if (typeof fbq === "function")                fbq("track", "Lead", data);           } catch(e){}
+  try { if (typeof ttq !== "undefined" && ttq.track)  ttq.track("Lead", data);              } catch(e){}
+  try { if (typeof gtag === "function")               gtag("event", "generate_lead", data); } catch(e){}
+}
+
+/* ============================================================
+   =====================  ESTADO / LÓGICA  ====================
+   Tudo em memória — sem localStorage/sessionStorage.
+   ============================================================ */
+const answers = { q1:"", q2:"", q3:"", q4:"" };
+const lead    = { nome:"", whatsapp:"" };
+
+let current = 0;
+let transTimer = null;
+let transitionNext = null;
+let selecting = false;
+
+/* ====== TROCA DE TELAS COM FADE ====== */
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>{
+    if(s.dataset.screen === name){
+      s.classList.add('active');
+      void s.offsetWidth;
+      s.classList.add('show');
+    } else {
+      s.classList.remove('show');
+      s.classList.remove('active');
+    }
+  });
+  window.scrollTo(0,0);
+}
+
+/* ====== PROGRESSO (4 etapas: concluídas + atual ativa) ====== */
+function renderProgress(el, doneCount, activeIndex){
+  el.innerHTML = "";
+  for(let i=0;i<4;i++){
+    const step = document.createElement('div');
+    let cls = 'step';
+    if(i < doneCount)          cls += ' done';
+    else if(i === activeIndex) cls += ' active';
+    step.className = cls;
+    step.innerHTML = '<i></i>';
+    el.appendChild(step);
+  }
+}
+
+/* ====== INICIAR ====== */
+function start(){
+  track('quiz_start');
+  current = 0;
+  renderQuestion();
+}
+
+/* ====== RENDERIZAR PERGUNTA ====== */
+function renderQuestion(){
+  const q = QUESTIONS[current];
+  document.getElementById('q-kicker').textContent = q.kicker;
+  document.getElementById('q-title').textContent  = q.title;
+
+  renderProgress(document.getElementById('progress'), current, current);
+  document.getElementById('q-back').classList.toggle('hidden', current === 0);
+
+  const box = document.getElementById('q-options');
+  box.innerHTML = "";
+  q.options.forEach(opt=>{
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = '<span class="radio"></span><span class="label">'+opt.label+'</span>';
+    btn.onclick = ()=> selectOption(opt.label, btn);
+    box.appendChild(btn);
+  });
+
+  renderBelow(q);   // conteúdo embaixo da pergunta (notificações na P1, animação nas demais)
+
+  selecting = false;
+  showScreen('question');
+}
+
+/* ====== CONTEÚDO EMBAIXO DA PERGUNTA ====== */
+function renderBelow(q){
+  stopNotifTicker();                       // sempre para o ticker ao trocar de pergunta
+  const host = document.getElementById('q-below');
+  host.innerHTML = "";
+  const b = q.below;
+  if(!b) return;
+
+  if(b.type === "notifications"){
+    startNotifTicker();                    // só a P1: notificações de venda acumulando
+  } else if(b.type === "diagram"){
+    let h = '<div class="diagram">';
+    b.blocks.forEach((blk,i)=>{
+      const base = i*2;                    // stagger: bloco, seta, bloco, seta…
+      if(i>0) h += '<div class="darrow" style="animation-delay:'+((base-1)*0.12)+'s">↓</div>';
+      h += '<div class="dblock" style="animation-delay:'+(base*0.12)+'s">'+
+             '<div class="dic">'+(blk.icon||'')+'</div>'+
+             '<div class="dtx"><div class="n">'+blk.n+'</div><div class="d">'+blk.d+'</div></div>'+
+           '</div>';
+    });
+    h += '</div><div class="dcaption" style="animation-delay:'+(b.blocks.length*2*0.12)+'s">'+b.caption+'</div>';
+    host.innerHTML = h;
+  } else { // "message" e "clock": ícone + mensagem
+    host.innerHTML =
+      '<div class="trans-icon">'+b.icon+'</div>' +
+      '<div class="trans-msg" style="animation-delay:.15s">'+b.text+'</div>';
+  }
+}
+
+/* ====== VOLTAR (sem transição) ====== */
+function goBack(){
+  if(current > 0){ current--; renderQuestion(); }
+}
+
+/* ====== SELECIONAR OPÇÃO (avança sozinho) ====== */
+function selectOption(label, btnEl){
+  if(selecting) return;
+  selecting = true;
+
+  answers['q'+(current+1)] = label;
+  track('question_answered', { index: current + 1, answer: label });
+
+  if(btnEl) btnEl.classList.add('selected');
+
+  const isLast = current === QUESTIONS.length - 1;
+  const q = QUESTIONS[current];
+
+  setTimeout(()=>{
+    // A transição é sempre só "Analisando sua resposta…", depois avança
+    showAnalyzing(()=>{
+      if(isLast){ goToVSL(); }
+      else { current++; renderQuestion(); }
+    });
+  }, SELECT_DELAY_MS);
+}
+
+/* ====== TRANSIÇÃO = "Analisando sua resposta…" ====== */
+function showAnalyzing(next){
+  transitionNext = next;
+  document.getElementById('trans-content').innerHTML =
+    '<div class="analyzing"><div class="spinner"></div><div class="msg">Analisando sua resposta…</div></div>';
+  showScreen('transition');
+  stopNotifTicker();                 // pausa as notificações enquanto analisa
+  clearTimeout(transTimer);
+  transTimer = setTimeout(advanceFromTransition, ANALYZE_MS);
+}
+function skipTransition(){
+  clearTimeout(transTimer);
+  advanceFromTransition();
+}
+function advanceFromTransition(){
+  const fn = transitionNext;
+  transitionNext = null;
+  if(fn) fn();
+}
+
+/* ====== NOTIFICAÇÕES ACUMULATIVAS (embaixo dos cards da pergunta) ====== */
+let notifSeq = 0, notifTimer = null, notifStartTimer = null;
+function addNotif(){
+  const host = document.getElementById('q-below');
+  if(!host) return;
+  const it = TRANS1_NOTIFS[notifSeq % TRANS1_NOTIFS.length];
+  notifSeq++;
+  // a nova entra POR CIMA (deslizando de cima); as anteriores ficam e a página estende o scroll
+  host.insertAdjacentHTML('afterbegin', buildNotif(it));
+  // limite de segurança: remove só as bem antigas (do fim) para não crescer sem fim
+  while(host.children.length > NOTIF_MAX_KEEP){ host.removeChild(host.lastChild); }
+  // tempo natural e espaçado: topo = "agora"; as de baixo, horários da tabela NOTIF_TIMES
+  [...host.children].forEach((el,i)=>{
+    const t = el.querySelector('.time');
+    if(t) t.textContent = NOTIF_TIMES[i] || NOTIF_TIMES[NOTIF_TIMES.length-1];
+  });
+}
+function scheduleNextNotif(){
+  // as primeiras entram rápido; depois desacelera (a pessoa fica pouco tempo na tela)
+  const delay = notifSeq < NOTIF_FAST_COUNT ? NOTIF_INTERVAL_MS : NOTIF_INTERVAL_SLOW_MS;
+  notifTimer = setTimeout(()=>{ addNotif(); scheduleNextNotif(); }, delay);
+}
+function startNotifTicker(){
+  stopNotifTicker();
+  notifSeq = 0;
+  const host = document.getElementById('q-below');
+  if(host) host.innerHTML = "";
+  // não aparece logo de cara: espera alguns segundos e então empilha uma a uma
+  notifStartTimer = setTimeout(()=>{
+    addNotif();
+    scheduleNextNotif();
+  }, NOTIF_START_DELAY_MS);
+}
+function stopNotifTicker(){
+  if(notifTimer){ clearTimeout(notifTimer); notifTimer = null; }
+  if(notifStartTimer){ clearTimeout(notifStartTimer); notifStartTimer = null; }
+}
+
+/* ====== TELA DA VSL ====== */
+function goToVSL(){
+  track('vsl_view');
+  stopNotifTicker();   // fora das perguntas, para o ticker
+  document.getElementById('diagnosis').textContent = buildDiagnosis();
+  renderProgress(document.getElementById('progress-vsl'), 4, -1);
+
+  const cta = document.getElementById('stickyCta');
+  if(CTA_DELAY_MS > 0){
+    cta.style.visibility = 'hidden';
+    setTimeout(()=>{ cta.style.visibility = 'visible'; }, CTA_DELAY_MS);
+  } else {
+    cta.style.visibility = 'visible';
+  }
+  showScreen('vsl');
+}
+
+/* ====== TELA DE CAPTURA ====== */
+function goToCapture(){
+  track('capture_view');
+  showScreen('capture');
+  // foco no nome (ajuda no mobile)
+  setTimeout(()=>{ document.getElementById('cap-name').focus(); }, 150);
+}
+
+/* ====== ENVIO DA CAPTURA -> WHATSAPP ====== */
+function submitCapture(){
+  const nome = document.getElementById('cap-name').value.trim();
+  const waRaw = document.getElementById('cap-wa').value.trim();
+  const waDigits = waRaw.replace(/\D/g,'');   // só dígitos
+  const err = document.getElementById('cap-err');
+
+  if(nome.length < 2){ err.textContent = "Digite seu nome."; return; }
+  if(waDigits.length < 10){ err.textContent = "Digite um WhatsApp válido com DDD."; return; }
+  err.textContent = "";
+
+  lead.nome = nome;
+  lead.whatsapp = waRaw;
+
+  track('whatsapp_click', { nome: nome });
+  trackLead({ content_name: 'quiz_tiktok_shop' });
+
+  /* Mensagem enviada ao WhatsApp do negócio, já com nome, contato e respostas. */
+  const message =
+    "Olá! Meu nome é " + nome + ". Acabei de fazer o diagnóstico e quero começar a vender no TikTok Shop como afiliado. 🚀\n\n" +
+    "Meu WhatsApp: " + waRaw + "\n\n" +
+    "Minhas respostas:\n" +
+    "1) Meu momento: " + answers.q1 + "\n" +
+    "2) O que me trava: " + answers.q2 + "\n" +
+    "3) Meu perfil no TikTok: " + answers.q3 + "\n" +
+    "4) Tempo por dia: " + answers.q4;
+
+  const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+  window.open(url, "_blank");
+}
+
+/* ====== BOOT ====== */
+function boot(){
+  document.getElementById('hero-badge').textContent = BADGE_TEXT;
+  document.getElementById('hero-fine').textContent  = FINE_TEXT;
+  showScreen('hero');
+}
+boot();
+</script>
+</body>
+</html>
