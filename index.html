@@ -59,55 +59,94 @@
      </script>
      ============================================================ -->
 
-<!-- FONTE INTER (Google Fonts). Para 100% offline, remova estas 2 linhas — o fallback usa sans-serif. -->
+<!-- Cor do tema (barra do navegador no mobile) -->
+<meta name="theme-color" content="#0A0A0A" />
+
+<!-- FONTES VORA: Archivo 800 (títulos/display) + Inter (corpo). Para 100% offline, remova estas 2 linhas — o fallback usa sans-serif. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <style>
-  /* ====== TOKENS DE ESTILO ====== */
+  /* ====== TOKENS DE ESTILO — IDENTIDADE VORA ======
+     Fundo preto absoluto, texto off-white, carmim como ÚNICO destaque
+     (usado em no máximo ~10% da tela: CTA, progresso, status, seleção). */
   :root{
-    --bg:#000000;
-    --card:#121212;
-    --accent:#FE2C55;   /* rosa/vermelho */
-    --accent2:#25F4EE;  /* ciano */
-    --text:#FFFFFF;
-    --muted:#A1A1A1;
-    --radius:16px;
-    --maxw:390px;       /* mobile-first: pensada para 390px */
+    --bg:#0A0A0A;          /* fundo base de toda a área */
+    --card:#141414;        /* superfície de conteúdo */
+    --lvl2:#1C1C1C;        /* elemento dentro do card */
+    --border:#2A2A2A;      /* separadores e contornos */
+    --ink:#F2EFE9;         /* títulos e corpo */
+    --mute:#8A8A8A;        /* apoio e legendas */
+    --carmim:#D7263D;      /* títulos/realces grandes, progresso, status */
+    --carmim-sm:#FF4D5E;   /* texto pequeno em destaque + links */
+    --carmim-btn:#B81D33;  /* botões cheios + glow */
+    --glow:0 0 48px rgba(215,38,61,.45);
+
+    /* aliases de compatibilidade (mantêm regras antigas apontando p/ VORA) */
+    --text:var(--ink);
+    --muted:var(--mute);
+    --accent:var(--carmim);
+
+    --radius:14px;         /* cards */
+    --radius-sm:12px;      /* elementos internos */
+    --maxw:640px;          /* coluna fluida (mesma medida do concorrente): 100% no mobile, limita em 640 no desktop */
   }
 
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 
+  /* Textura de grão/filme: ruído SVG fixo por cima de tudo, bem sutil.
+     Dá profundidade/tato sem grid nem ilustração. pointer-events:none =
+     não atrapalha cliques; mix-blend overlay funde no fundo escuro. */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;
+    opacity:.07;
+    background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.8'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:160px 160px;
+  }
+
+  /* ====== "EMBER BLOOM" (porte do componente 21st.dev, recolorido VORA) ======
+     Estrutura fiel: container container-type:size + camada interna com inset
+     negativo e blur. Cores trocadas do quente (dourado/laranja) para a paleta
+     carmim. Fixo atrás de todo o conteúdo (#app tem z-index:1). */
+  .bloom-bg{
+    position:fixed;inset:0;z-index:0;overflow:hidden;
+    container-type:size;pointer-events:none;
+  }
+  .bloom-layer{
+    position:absolute;inset:-2cqmin;
+    filter:blur(0.8cqmin);
+    background-color:var(--bg);
+    background-image:
+      /* vinheta: escurece as bordas e dá profundidade */
+      radial-gradient(130% 120% at 50% 44%, rgba(10,10,10,0) 46%, rgba(0,0,0,.78) 100%),
+      /* bloom carmim nítido no topo, caindo pro preto */
+      radial-gradient(135% 64% at 50% -6%,
+        rgba(255,120,132,.82) 0%,
+        rgba(223,38,61,.55) 20%,
+        rgba(150,24,42,.28) 42%,
+        rgba(10,10,10,0) 64%);
+  }
+
   html,body{height:100%;}
   body{
+    /* Base preta. O gradiente "Ember Bloom" (recolorido VORA) fica na
+       camada .bloom-bg; a textura de grão vem no body::before. */
     background:var(--bg);
     color:var(--text);
     font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.4;
+    line-height:1.55;
     -webkit-font-smoothing:antialiased;
     display:flex;
     justify-content:center;
     min-height:100dvh;
   }
 
-  /* ====== FUNDO AURORA (dois brilhos difusos, movimento lento) ====== */
-  .aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#000;}
-  .aurora .blob{position:absolute;width:70vmax;height:70vmax;border-radius:50%;filter:blur(90px);opacity:.15;will-change:transform;}
-  .aurora .pink{background:var(--accent);top:-26vmax;left:-26vmax;animation:aurora1 24s ease-in-out infinite alternate;}
-  .aurora .cyan{background:var(--accent2);bottom:-26vmax;right:-26vmax;animation:aurora2 28s ease-in-out infinite alternate;}
-  @keyframes aurora1{0%{transform:translate(0,0) scale(1);}100%{transform:translate(13vmax,10vmax) scale(1.15);}}
-  @keyframes aurora2{0%{transform:translate(0,0) scale(1);}100%{transform:translate(-12vmax,-8vmax) scale(1.12);}}
-  @media (prefers-reduced-motion:reduce){.aurora .blob{animation:none;}}
-  /* Quadriculado sutil por cima dos brilhos (não compete com o conteúdo) */
-  .aurora .grid{
-    position:absolute;inset:0;pointer-events:none;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size:38px 38px;
-  }
+  /* ====== TIPOGRAFIA DISPLAY (VORA) ======
+     Archivo 800, caixa alta, tracking apertado — para todos os títulos. */
+  .display{font-family:'Archivo',sans-serif;font-weight:800;text-transform:uppercase;
+    letter-spacing:-.02em;line-height:1;text-wrap:balance;}
 
-  /* Container central limitado a 390px (acima do fundo aurora) */
+  /* Container central limitado a 390px */
   #app{
     width:100%;
     max-width:var(--maxw);
@@ -135,41 +174,58 @@
 
   /* ====== BARRA DE PROGRESSO (4 etapas) ====== */
   .progress{display:flex;gap:6px;}
-  .progress .step{flex:1;height:5px;border-radius:99px;background:#2a2a2a;overflow:hidden;}
-  .progress .step > i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s ease;}
+  .progress .step{flex:1;height:5px;border-radius:99px;background:var(--lvl2);overflow:hidden;}
+  .progress .step > i{display:block;height:100%;width:0;border-radius:99px;background:var(--carmim);transition:width .4s ease;}
   .progress .step.done > i{width:100%;}
   .progress .step.active > i{width:45%;animation:activePulse 1.4s ease-in-out infinite;}
   @keyframes activePulse{0%,100%{opacity:.55}50%{opacity:1}}
 
-  /* ====== HERO ====== */
-  .hero{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center;gap:20px;}
-  /* Imagem do topo do hero */
-  /* Proporção FIXA 3/4: enquadra as notificações + a pessoa/carro igual em qualquer celular.
-     (Antes usava max-height:44vh, que no mobile virava uma moldura quase quadrada e cortava o criativo.) */
-  .hero-img{width:100%;aspect-ratio:3/4;border-radius:var(--radius);display:block;object-fit:cover;object-position:center 40%;box-shadow:0 14px 40px rgba(0,0,0,0.5);}
-  .badge{align-self:center;font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--accent2);border:1px solid rgba(37,244,238,.35);padding:6px 14px;border-radius:99px;}
-  h1{font-size:30px;line-height:1.18;font-weight:800;letter-spacing:-.5px;}
-  h1 .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .hero p{color:var(--muted);font-size:16px;}
+  /* ====== HERO (coluna fluida + imagem 3:4 inline — modelo responsivo) ====== */
+  .hero{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:16px;padding:10px 0;}
+  /* Imagem 3:4 (720x960): fluida no mobile, capada em 440px no desktop e centralizada.
+     Proporção previsível (object-fit:cover) — mesma dimensão usada pelo concorrente. */
+  .hero-img{
+    width:100%;max-width:440px;aspect-ratio:3/4;margin:2px auto;
+    display:block;object-fit:cover;object-position:center 30%;
+    border:0;border-radius:var(--radius);
+    box-shadow:0 22px 60px rgba(0,0,0,.6);
+  }
+  /* Wordmark VORA (Archivo 800, caixa alta, tracking apertado) */
+  .wordmark{align-self:center;font-family:'Archivo',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-.02em;font-size:30px;line-height:1;color:var(--ink);margin-bottom:2px;}
+  .badge{align-self:center;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--carmim-sm);border:1px solid rgba(215,38,61,.4);padding:6px 14px;border-radius:999px;}
+  /* Título agrupado: linha 1 (branco + TikTok Shop carmim) + 3 claims */
+  .headline{display:flex;flex-direction:column;align-items:center;gap:8px;}
+  /* sombra suave p/ o texto do hero não perder contraste sobre o bloom */
+  .wordmark,.badge,h1,.claims li{text-shadow:0 2px 22px rgba(0,0,0,.55);}
+  /* Título em 2 linhas: "COMO VENDER NO" / "TIKTOK SHOP" (continuação, carmim) */
+  h1{font-family:'Archivo',sans-serif;font-size:clamp(30px,7vw,44px);line-height:1;font-weight:800;letter-spacing:-.02em;text-transform:uppercase;margin:0 auto;}
+  h1 .grad{color:var(--carmim);}
+  /* Os três "SEM ..." — BRANCO (contraste máximo) + ✓ carmim pra manter o destaque */
+  .claims{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:5px;}
+  .claims li{font-family:'Archivo',sans-serif;font-weight:800;text-transform:uppercase;
+    letter-spacing:-.01em;line-height:1.08;font-size:clamp(19px,4.4vw,26px);color:var(--ink);}
+  .claims li::before{content:"✓";color:var(--carmim-sm);margin-right:9px;font-weight:800;}
+  .hero p{color:var(--mute);font-size:16px;max-width:420px;margin:0 auto;}
 
   /* ====== BOTÃO PRIMÁRIO ====== */
-  .btn{appearance:none;border:none;cursor:pointer;font-family:inherit;font-size:17px;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--accent),#ff5c7a);padding:18px 22px;border-radius:var(--radius);width:100%;transition:transform .12s ease,filter .12s ease;box-shadow:0 8px 30px rgba(254,44,85,.35);}
-  .btn:active{transform:scale(.98);filter:brightness(1.05);}
-  .btn-wa{background:linear-gradient(90deg,#25D366,#1ebe5a);box-shadow:0 8px 30px rgba(37,211,102,.35);display:flex;align-items:center;justify-content:center;gap:10px;}
+  .btn{appearance:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:17px;font-weight:700;letter-spacing:.01em;color:var(--ink);background:var(--carmim-btn);padding:18px 22px;border-radius:999px;width:100%;transition:transform .12s ease,filter .12s ease;box-shadow:var(--glow);}
+  .btn:active{transform:scale(.98);filter:brightness(1.08);}
+  /* Botão WhatsApp: verde da plataforma (único uso de verde, exclusivo p/ ação do WhatsApp) */
+  .btn-wa{background:#25D366;color:#0A0A0A;box-shadow:0 0 48px rgba(37,211,102,.4);display:flex;align-items:center;justify-content:center;gap:10px;}
 
   /* ====== PERGUNTAS ====== */
-  .q-kicker{color:var(--accent2);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
-  .q-title{font-size:25px;font-weight:800;line-height:1.2;letter-spacing:-.4px;margin-bottom:24px;}
+  .q-kicker{color:var(--mute);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;margin-bottom:12px;}
+  .q-title{font-family:'Archivo',sans-serif;font-size:26px;font-weight:800;line-height:1.05;letter-spacing:-.015em;text-transform:uppercase;margin-bottom:24px;}
   .options{display:flex;flex-direction:column;gap:12px;}
-  .option{position:relative;display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid #232323;border-radius:var(--radius);padding:22px 18px;cursor:pointer;text-align:left;color:var(--text);font-family:inherit;font-size:16.5px;font-weight:500;transition:transform .12s ease;}
+  .option{position:relative;display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:22px 18px;cursor:pointer;text-align:left;color:var(--ink);font-family:inherit;font-size:16.5px;font-weight:500;transition:transform .12s ease,border-color .15s ease,background .15s ease;}
   .option:active{transform:scale(.99);}
   /* indicador redondo (radio) que vira checkbox ao selecionar */
-  .option .radio{flex:0 0 22px;width:22px;height:22px;border-radius:50%;border:2px solid #3a3a3a;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;line-height:1;transition:border-color .15s ease,background .15s ease;}
-  .option.selected{border-color:transparent;background-image:linear-gradient(#1b1b1b,#1b1b1b),linear-gradient(90deg,var(--accent),var(--accent2));background-origin:border-box;background-clip:padding-box,border-box;}
-  .option.selected .radio{border-color:transparent;background:linear-gradient(135deg,var(--accent),var(--accent2));}
+  .option .radio{flex:0 0 22px;width:22px;height:22px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:12px;font-weight:800;line-height:1;transition:border-color .15s ease,background .15s ease;}
+  .option.selected{border-color:var(--carmim);background:var(--lvl2);}
+  .option.selected .radio{border-color:var(--carmim);background:var(--carmim);}
   .option.selected .radio::after{content:"✓";}
   @media (hover:hover){
-    .option:hover{border-color:transparent;background-image:linear-gradient(var(--card),var(--card)),linear-gradient(90deg,var(--accent),var(--accent2));background-origin:border-box;background-clip:padding-box,border-box;}
+    .option:hover{border-color:var(--carmim);}
   }
 
   /* ====== TELAS DE TRANSIÇÃO ====== */
@@ -186,51 +242,53 @@
   @keyframes belowIn{to{opacity:1;transform:none;}}
   .notif{
     display:flex;align-items:flex-start;gap:10px;
-    background:rgba(28,28,30,0.72);            /* #1C1C1E com leve transparência */
+    background:var(--card);
     -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
-    border:1px solid rgba(255,255,255,0.07);
-    border-radius:14px;padding:10px 12px;width:85%;
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);padding:10px 12px;width:85%;
     box-shadow:0 10px 26px rgba(0,0,0,0.45);
     opacity:0;transform:translateY(-18px);     /* entra deslizando de cima */
     animation:notifIn .5s cubic-bezier(.2,.8,.2,1) forwards;
   }
-  .notif .ic{flex:0 0 34px;height:34px;width:34px;border-radius:9px;background:#000;display:flex;align-items:center;justify-content:center;}
+  .notif .ic{flex:0 0 34px;height:34px;width:34px;border-radius:9px;background:var(--lvl2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--carmim);}
   .notif .ic svg{width:19px;height:19px;}
   /* min-width:0 é o que permite o ellipsis funcionar dentro do flex */
   .notif .body{flex:1 1 auto;min-width:0;text-align:left;}
   /* título em UMA linha, nome do produto cortado com … (nunca quebra nem empurra o horário) */
-  .notif .p{font-size:12.5px;font-weight:700;color:#fff;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .notif .c{font-size:11.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .notif .p{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .notif .c{font-size:11.5px;color:var(--mute);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  /* valor em dinheiro: branco negrito (nunca vermelho) */
+  .notif .c b{color:var(--ink);font-weight:700;}
   /* horário: largura própria, fixo à direita e alinhado ao topo */
   .notif .time{flex:0 0 auto;white-space:nowrap;font-size:11px;color:var(--muted);line-height:1.25;}
   @keyframes notifIn{to{opacity:1;transform:none;}}
   /* Diagrama de 3 blocos (menores que os cards de resposta, com ícone) */
   .diagram{display:flex;flex-direction:column;gap:6px;align-items:center;width:100%;}
-  .dblock{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid #232323;border-radius:12px;padding:9px 13px;width:76%;text-align:left;}
-  .dblock .dic{flex:0 0 32px;width:32px;height:32px;border-radius:9px;background:#1c1c1c;display:flex;align-items:center;justify-content:center;font-size:17px;}
+  .dblock{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 13px;width:76%;text-align:left;}
+  .dblock .dic{flex:0 0 32px;width:32px;height:32px;border-radius:9px;background:var(--lvl2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:17px;}
   .dblock .dtx{flex:1;min-width:0;}
-  .dblock .n{font-size:13px;font-weight:700;line-height:1.2;}
-  .dblock .d{font-size:11px;color:var(--muted);margin-top:1px;}
-  .darrow{color:var(--accent2);font-size:15px;line-height:1;}
-  .dcaption{color:var(--text);font-weight:700;font-size:13.5px;margin-top:6px;text-align:center;}
+  .dblock .n{font-size:13px;font-weight:700;line-height:1.2;color:var(--ink);}
+  .dblock .d{font-size:11px;color:var(--mute);margin-top:1px;}
+  .darrow{color:var(--carmim);font-size:15px;line-height:1;}
+  .dcaption{color:var(--ink);font-weight:700;font-size:13.5px;margin-top:6px;text-align:center;}
   /* Transições 3 e 4 — ícone + mensagem */
   .trans-icon{font-size:52px;line-height:1;}
   .trans-msg{font-size:17px;font-weight:600;max-width:300px;line-height:1.4;}
   /* Etapa "Analisando sua resposta…" */
   .analyzing{display:flex;flex-direction:column;align-items:center;gap:18px;}
-  .spinner{width:60px;height:60px;border-radius:50%;border:4px solid rgba(255,255,255,0.10);border-top-color:var(--accent);border-right-color:var(--accent2);animation:spin .9s linear infinite;}
+  .spinner{width:60px;height:60px;border-radius:50%;border:4px solid var(--lvl2);border-top-color:var(--carmim);border-right-color:var(--carmim);animation:spin .9s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg);}}
   .analyzing .msg{font-size:17px;font-weight:600;}
 
   /* ====== TELA DA VSL ====== */
   .vsl{flex:1;display:flex;flex-direction:column;gap:16px;text-align:center;}
-  .vsl h2{font-size:24px;font-weight:800;line-height:1.2;letter-spacing:-.4px;}
-  .diagnosis{color:var(--text);font-size:16px;line-height:1.5;}
-  .vsl-headline{color:var(--muted);font-size:14px;line-height:1.45;}
+  .vsl h2{font-family:'Archivo',sans-serif;font-size:25px;font-weight:800;line-height:1.05;letter-spacing:-.015em;text-transform:uppercase;}
+  .diagnosis{color:var(--ink);font-size:16px;line-height:1.5;}
+  .vsl-headline{color:var(--mute);font-size:14px;line-height:1.45;}
   /* ESPAÇO RESERVADO PARA O VÍDEO — troque o bloco .video-slot no HTML pelo seu <iframe>. */
-  .video-slot{position:relative;width:100%;aspect-ratio:9/16;background:var(--card);border:1px solid #232323;border-radius:var(--radius);overflow:hidden;display:flex;align-items:center;justify-content:center;}
-  .video-slot .placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--muted);}
-  .video-slot .play{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;}
+  .video-slot{position:relative;width:100%;aspect-ratio:9/16;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+  .video-slot .placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--mute);}
+  .video-slot .play{width:64px;height:64px;border-radius:50%;background:var(--carmim-btn);box-shadow:var(--glow);display:flex;align-items:center;justify-content:center;}
   .video-slot .play svg{margin-left:4px;}
   /* CTA fixo no rodapé */
   /* CTA fixo: fundo transparente com leve desfoque que some para cima (sem retângulo preto) */
@@ -239,37 +297,41 @@
 
   /* ====== TELA DE CAPTURA (nome + WhatsApp) ====== */
   .capture{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;}
-  .capture h2{font-size:26px;font-weight:800;letter-spacing:-.4px;text-align:center;}
-  .capture .sub{color:var(--muted);font-size:15px;text-align:center;margin-top:-6px;}
+  .capture h2{font-family:'Archivo',sans-serif;font-size:27px;font-weight:800;letter-spacing:-.02em;text-transform:uppercase;line-height:1.02;text-align:center;}
+  .capture .sub{color:var(--mute);font-size:15px;text-align:center;margin-top:-6px;}
   .field{display:flex;flex-direction:column;gap:6px;text-align:left;}
-  .field span{font-size:13px;color:var(--muted);font-weight:500;}
-  .field input{background:var(--card);border:1px solid #232323;border-radius:var(--radius);padding:16px;color:var(--text);font-family:inherit;font-size:16px;} /* 16px evita zoom no iOS */
-  .field input::placeholder{color:#666;}
-  .field input:focus{outline:none;border-color:var(--accent2);}
-  .err{color:var(--accent);font-size:13px;min-height:16px;text-align:center;}
+  .field span{font-size:13px;color:var(--mute);font-weight:500;}
+  .field input{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;color:var(--ink);font-family:inherit;font-size:16px;} /* 16px evita zoom no iOS */
+  .field input::placeholder{color:var(--mute);}
+  .field input:focus{outline:none;border-color:var(--carmim);}
+  .err{color:var(--carmim-sm);font-size:13px;min-height:16px;text-align:center;}
 
-  .fine{color:var(--muted);font-size:12px;text-align:center;}
+  .fine{color:var(--mute);font-size:12px;text-align:center;}
 </style>
 </head>
 
 <body>
 
-<!-- Fundo aurora (fica atrás de todo o conteúdo) -->
-<div class="aurora" aria-hidden="true">
-  <div class="blob pink"></div>
-  <div class="blob cyan"></div>
-  <div class="grid"></div>
-</div>
+<!-- Fundo "Ember Bloom" (recolorido VORA) — fica atrás de todo o conteúdo -->
+<div class="bloom-bg" aria-hidden="true"><div class="bloom-layer"></div></div>
 
 <div id="app">
 
   <!-- ======================= HERO / CAPA ======================= -->
   <section class="screen" data-screen="hero">
     <div class="hero">
-      <!-- Imagem do topo (troque o arquivo hero.jpg na pasta para atualizar) -->
-      <img class="hero-img" src="hero.jpg" alt="Vendas acontecendo no TikTok Shop" />
+      <span class="wordmark">VORA</span>
       <span class="badge" id="hero-badge"></span>
-      <h1>Como vender no <span class="grad">TikTok Shop sem estoque e sem nunca aparecer</span></h1>
+      <div class="headline">
+        <h1>Como vender no<br><span class="grad">TikTok Shop</span></h1>
+        <ul class="claims">
+          <li>Sem aparecer</li>
+          <li>Sem ter estoque</li>
+          <li>Sem investir em anúncio</li>
+        </ul>
+      </div>
+      <!-- Imagem 3:4 inline (troque banner-mobile-vora2.jpg na pasta para atualizar) -->
+      <img class="hero-img" src="banner-mobile-vora2.jpg" alt="Vendas acontecendo no TikTok Shop" />
       <p>Responda 4 perguntas e descubra o que está te impedindo de fazer suas primeiras vendas como afiliado.</p>
       <button class="btn" onclick="start()">Fazer meu diagnóstico →</button>
       <p class="fine" style="margin-top:4px;" id="hero-fine"></p>
@@ -345,7 +407,7 @@
       </label>
       <p class="err" id="cap-err"></p>
       <button class="btn btn-wa" onclick="submitCapture()">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.06c-.24.68-1.42 1.31-1.95 1.35-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.37-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.27-.29.58-.36.78-.36l.56.01c.18.01.42-.07.66.5.24.58.82 2.01.89 2.16.07.14.12.31.02.51-.1.2-.15.31-.29.48-.14.17-.3.38-.43.51-.14.14-.29.29-.12.57.17.29.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.42.29.14.45.12.62-.07.17-.2.71-.83.9-1.11.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.69-.17 1.37z"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#0A0A0A"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.06c-.24.68-1.42 1.31-1.95 1.35-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.37-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.27-.29.58-.36.78-.36l.56.01c.18.01.42-.07.66.5.24.58.82 2.01.89 2.16.07.14.12.31.02.51-.1.2-.15.31-.29.48-.14.17-.3.38-.43.51-.14.14-.29.29-.12.57.17.29.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.42.29.14.45.12.62-.07.17-.2.71-.83.9-1.11.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.69-.17 1.37z"/></svg>
         Falar no WhatsApp agora
       </button>
       <p class="fine">Seus dados são usados só para este atendimento.</p>
@@ -392,28 +454,29 @@ const TRANS1_NOTIFS = [
 const NOTIF_TIMES = ["agora","há 4 min","há 12 min","há 28 min","há 47 min","há 1 h","há 2 h"];
 
 /* Notificações de venda que se acumulam embaixo dos cards (a página estende o scroll) */
-const NOTIF_START_DELAY_MS   = 3500;  // espera antes da 1ª aparecer (não surge logo de cara)
+const NOTIF_START_DELAY_MS   = 1000;  // 1s após o lead entrar na pergunta 1, a 1ª notificação já aparece
 const NOTIF_INTERVAL_MS      = 3000;  // intervalo entre as PRIMEIRAS (ritmo rápido)
 const NOTIF_INTERVAL_SLOW_MS = 9000;  // intervalo depois das primeiras (mais devagar)
 const NOTIF_FAST_COUNT       = 3;     // quantas entram no ritmo rápido antes de desacelerar
 const NOTIF_MAX_KEEP         = 30;    // limite de segurança (remove só as bem antigas do fim)
 
-/* Logo do TikTok (nota musical com o efeito ciano/rosa da marca) */
-const TT_PATH = "M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.78.12v-3.2a5.7 5.7 0 0 0-.78-.05 5.69 5.69 0 1 0 5.69 5.69V9.01a7.34 7.34 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.24-1.48z";
-const TIKTOK_SVG =
-  '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">' +
-    '<path d="'+TT_PATH+'" fill="#25F4EE" transform="translate(-1.1,1.1)"/>' +
-    '<path d="'+TT_PATH+'" fill="#FE2C55" transform="translate(1.1,-1.1)"/>' +
-    '<path d="'+TT_PATH+'" fill="#ffffff"/>' +
+/* Ícone de status de venda (sacola com check) — carmim via currentColor.
+   Identidade VORA: sem nota musical/mascote; o destaque é o carmim nos status. */
+const SALE_SVG =
+  '<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" ' +
+    'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M6 7h12l-1 13H7L6 7z"/>' +
+    '<path d="M9 7a3 3 0 0 1 6 0"/>' +
+    '<path d="M9.5 13.5l1.8 1.8 3.2-3.2"/>' +
   '</svg>';
 
 /* Monta o HTML de um card de notificação de venda (tempo começa em "agora") */
 function buildNotif(it){
   return '<div class="notif">' +
-    '<div class="ic">'+TIKTOK_SVG+'</div>' +
+    '<div class="ic">'+SALE_SVG+'</div>' +
     '<div class="body">' +
       '<div class="p">Vendeu · '+it.produto+'</div>' +
-      '<div class="c">Comissão: '+it.comissao+'</div>' +
+      '<div class="c">Comissão: <b>'+it.comissao+'</b></div>' +
     '</div>' +
     '<div class="time">agora</div>' +
   '</div>';
