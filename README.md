@@ -25,7 +25,7 @@ python3 -m http.server 8000
 ## Arquivos
 
 - `index.html` — todo o quiz (HTML, CSS e JS inline).
-- `hero.jpg` — imagem do topo da capa (troque o arquivo mantendo o nome para atualizar).
+- `banner-mobile-vora2.jpg` — imagem do topo da capa (troque o arquivo mantendo o nome para atualizar).
 
 ## Configuração
 
