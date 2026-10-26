@@ -286,7 +286,7 @@
   .diagnosis{color:var(--ink);font-size:16px;line-height:1.5;}
   .vsl-headline{color:var(--mute);font-size:14px;line-height:1.45;}
   /* ESPAÇO RESERVADO PARA O VÍDEO — troque o bloco .video-slot no HTML pelo seu <iframe>. */
-  .video-slot{position:relative;width:100%;aspect-ratio:9/16;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+  .video-slot{position:relative;width:100%;aspect-ratio:16/9;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;align-items:center;justify-content:center;}
   .video-slot .placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--mute);}
   .video-slot .play{width:64px;height:64px;border-radius:50%;background:var(--carmim-btn);box-shadow:var(--glow);display:flex;align-items:center;justify-content:center;}
   .video-slot .play svg{margin-left:4px;}
@@ -460,20 +460,20 @@ const NOTIF_INTERVAL_SLOW_MS = 9000;  // intervalo depois das primeiras (mais de
 const NOTIF_FAST_COUNT       = 3;     // quantas entram no ritmo rápido antes de desacelerar
 const NOTIF_MAX_KEEP         = 30;    // limite de segurança (remove só as bem antigas do fim)
 
-/* Ícone de status de venda (sacola com check) — carmim via currentColor.
-   Identidade VORA: sem nota musical/mascote; o destaque é o carmim nos status. */
-const SALE_SVG =
-  '<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" ' +
-    'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-    '<path d="M6 7h12l-1 13H7L6 7z"/>' +
-    '<path d="M9 7a3 3 0 0 1 6 0"/>' +
-    '<path d="M9.5 13.5l1.8 1.8 3.2-3.2"/>' +
+/* Ícone do TikTok (logo oficial com o glitch ciano/magenta sobre branco),
+   exibido no tile escuro de cada notificação de venda do TikTok Shop. */
+const TT_PATH = "M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.1v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.78.12v-3.2a5.7 5.7 0 0 0-.78-.05 5.69 5.69 0 1 0 5.69 5.69V9.01a7.34 7.34 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.24-1.48z";
+const TIKTOK_SVG =
+  '<svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">' +
+    '<path d="'+TT_PATH+'" fill="#25F4EE" transform="translate(-1,1)"/>' +
+    '<path d="'+TT_PATH+'" fill="#FE2C55" transform="translate(1,-1)"/>' +
+    '<path d="'+TT_PATH+'" fill="#ffffff"/>' +
   '</svg>';
 
 /* Monta o HTML de um card de notificação de venda (tempo começa em "agora") */
 function buildNotif(it){
   return '<div class="notif">' +
-    '<div class="ic">'+SALE_SVG+'</div>' +
+    '<div class="ic">'+TIKTOK_SVG+'</div>' +
     '<div class="body">' +
       '<div class="p">Vendeu · '+it.produto+'</div>' +
       '<div class="c">Comissão: <b>'+it.comissao+'</b></div>' +
